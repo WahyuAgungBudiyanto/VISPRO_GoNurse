@@ -1,0 +1,125 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+namespace GoNurse
+{
+    public partial class RegisterUser : Form
+    {
+        public RegisterUser()
+        {
+            InitializeComponent();
+        }
+
+        private void bunifuLabel4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RegisterUser_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuTextBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        Login form_login = new Login();
+        private void label_btnSignIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //connection 
+                string myConnection = "datasource=localhost; port=3306; username=root; password="; //initial database
+                MySqlConnection myConn = new MySqlConnection(myConnection); //load mysqllibrary conection
+                MySqlDataAdapter myDataAdapter = new MySqlDataAdapter();    //create data adapter
+                myDataAdapter.SelectCommand = new MySqlCommand("select * gonurse.db_customers;", myConn);// sql syntax
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(myDataAdapter); //build data adapter
+                myConn.Open();// start connection
+
+                DataSet ds = new DataSet();
+
+                MessageBox.Show("Conected");
+
+                myConn.Close();// end connection
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btn_register_Click(object sender, EventArgs e)
+        {
+            if (textBox_fullName.Text == "" || textBox_username.Text == "" || textBox_password.Text == "" || textBox_no.Text == "" || textBox_address.Text == "")
+            {
+                MessageBox.Show("Please fill all the fields", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                //connection 
+                string myConnection = "datasource=localhost;port=3306;username=root;password=";
+                string Query = "insert into gonurse.db_customers (id_user,full_name,username,password,no_telp,alamat) values('','" + this.textBox_fullName.Text + "','" + this.textBox_username.Text + "','" + this.textBox_password.Text + "','" + this.textBox_no.Text + "','" + this.textBox_address.Text + "');";
+                MySqlConnection myConn = new MySqlConnection(myConnection);
+                MySqlCommand cmdDatabase = new MySqlCommand(Query, myConn);
+                MySqlDataReader myReader;
+                try
+                {
+                    myConn.Open();
+
+                    myReader = cmdDatabase.ExecuteReader();
+                    MessageBox.Show("Your Account has been Successfully Created", "Registration Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    /*Insert form_customer = new Insert();*/
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void textBox_fullName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //No Numbers Allowed
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+                base.OnKeyPress(e);
+            }
+        }
+
+        private void textBox_username_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //No Space Allowed
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                base.OnKeyPress(e);
+            }
+        }
+    }
+}
