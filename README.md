@@ -6,5 +6,5 @@ Find Nurse Application Mobile Interface + Functional Database</h3>
 
 
 # Screenshot
-![fruits dashboard](https://github.com/WahyuAgungBudiyanto/VISPRO_GoNurse/blob/main/Images/ezgif-2-8e587a994e7f.gif)
+<p align="center">![fruits dashboard](https://github.com/WahyuAgungBudiyanto/VISPRO_GoNurse/blob/main/Images/ezgif-2-8e587a994e7f.gif)</p>
 
