@@ -4,9 +4,5 @@
 <h3 align="center">
 Find Nurse Application Mobile Interface + Functional Database</h3>
 
-<p align="center">
 # Screenshot
 ![fruits dashboard](https://github.com/WahyuAgungBudiyanto/VISPRO_GoNurse/blob/main/Images/ezgif-2-8e587a994e7f.gif)
-
-</p>
-
